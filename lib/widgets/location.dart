@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LocationWidget extends StatefulWidget {
   @override
@@ -7,7 +8,8 @@ class LocationWidget extends StatefulWidget {
 }
 
 class _LocationWidgetState extends State<LocationWidget> {
-  String _locationMessage = '';
+  String _locationMessage = 'https://wa.me/?text=';
+  String? whatsAppLink;
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
@@ -51,9 +53,17 @@ class _LocationWidgetState extends State<LocationWidget> {
     final position = await _determinePosition();
 
     setState(() {
-      _locationMessage =
+      _locationMessage = _locationMessage +
           'Latitude: ${position.latitude}\nLongitude: ${position.longitude}';
     });
+  }
+
+  void sendWhatsAppLink() async {
+    if (await canLaunchUrl(Uri.parse(_locationMessage))) {
+      await launchUrl(Uri.parse(_locationMessage));
+    } else {
+      print('Failed to open WhatsApp');
+    }
   }
 
   @override
@@ -61,12 +71,27 @@ class _LocationWidgetState extends State<LocationWidget> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        const TextField(
+          decoration: InputDecoration(hintText: 'Nombre del volcán'),
+        ),
+        const TextField(
+          decoration: InputDecoration(hintText: 'Altura del volcán'),
+        ),
         ElevatedButton(
           onPressed: _getCurrentLocation,
-          child: Text('Get Location'),
+          child: const Text('Get Location'),
         ),
-        SizedBox(height: 20),
-        Text(_locationMessage),
+        ElevatedButton(
+          onPressed: sendWhatsAppLink,
+          child: const Text('Generar fucking link de WhatsApp'),
+        ),
+        const SizedBox(height: 20),
+        TextButton(
+            onPressed: () {
+              launchUrl(Uri.parse(_locationMessage),
+                  mode: LaunchMode.externalApplication);
+            },
+            child: Text(_locationMessage)),
       ],
     );
   }
