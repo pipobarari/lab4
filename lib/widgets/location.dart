@@ -8,6 +8,8 @@ class LocationWidget extends StatefulWidget {
 }
 
 class _LocationWidgetState extends State<LocationWidget> {
+  final myControllerVolcanoName = TextEditingController();
+  final myControllerVolcanoHeight = TextEditingController();
   String _locationMessage = 'https://wa.me/?text=';
   String? whatsAppLink;
 
@@ -54,7 +56,7 @@ class _LocationWidgetState extends State<LocationWidget> {
 
     setState(() {
       _locationMessage = _locationMessage +
-          'Latitude: ${position.latitude}\nLongitude: ${position.longitude}';
+          'Latitude: ${position.latitude}\nLongitude: ${position.longitude} ${myControllerVolcanoName.text} ${myControllerVolcanoHeight.text} }}';
     });
   }
 
@@ -71,11 +73,13 @@ class _LocationWidgetState extends State<LocationWidget> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const TextField(
-          decoration: InputDecoration(hintText: 'Nombre del volcán'),
+        TextField(
+          controller: myControllerVolcanoName,
+          decoration: const InputDecoration(hintText: 'Nombre del volcán'),
         ),
-        const TextField(
-          decoration: InputDecoration(hintText: 'Altura del volcán'),
+        TextField(
+          controller: myControllerVolcanoHeight,
+          decoration: const InputDecoration(hintText: 'Altura del volcán'),
         ),
         ElevatedButton(
           onPressed: _getCurrentLocation,
