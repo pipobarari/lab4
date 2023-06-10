@@ -11,7 +11,7 @@ class _LocationWidgetState extends State<LocationWidget> {
   final myControllerVolcanoName = TextEditingController();
   final myControllerVolcanoHeight = TextEditingController();
 
-  String _uriNewView = 'http:/localhost:57752/#/location';
+  String _uriNewView = 'http:/localhost:51597/#/location';
   String _locationMessage = '';
   String whatsAppLink = 'http://wa.me/?text=';
 
@@ -78,29 +78,61 @@ class _LocationWidgetState extends State<LocationWidget> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        TextField(
-          controller: myControllerVolcanoName,
-          decoration: const InputDecoration(hintText: 'Nombre del volcán'),
+        const Text(
+          'REGISTER A NEW VOLCANO',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          ),
         ),
-        TextField(
-          controller: myControllerVolcanoHeight,
-          decoration: const InputDecoration(hintText: 'Altura del volcán'),
+        const SizedBox(height: 50),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+          child: TextField(
+            controller: myControllerVolcanoName,
+            decoration: const InputDecoration(
+              hintText: 'Volcano Name',
+            ),
+          ),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+          child: TextField(
+            controller: myControllerVolcanoHeight,
+            decoration: const InputDecoration(
+              hintText: 'Volcano Height',
+            ),
+          ),
+        ),
+        const SizedBox(height: 30),
         ElevatedButton(
           onPressed: _getCurrentLocation,
-          child: const Text('Get Location'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.lightBlue, // Cambio de color aquí
+          ),
+          child: const Text('Generate Link'),
         ),
+        const SizedBox(height: 15),
         ElevatedButton(
           onPressed: sendWhatsAppLink,
-          child: const Text('Generar link de WhatsApp'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green, // Cambio de color aquí
+          ),
+          child: const Text('Share by WhatsApp'),
         ),
         const SizedBox(height: 20),
+        const Text('👇🏼 Click the link generated to open a new view 👇🏼'),
+        const SizedBox(height: 20),
         TextButton(
-            onPressed: () {
-              launchUrl(Uri.parse(_locationMessage),
-                  mode: LaunchMode.externalApplication);
-            },
-            child: Text(_locationMessage)),
+          onPressed: () {
+            launchUrl(
+              Uri.parse(_locationMessage),
+              mode: LaunchMode.externalApplication,
+            );
+          },
+          child: Text(_locationMessage),
+        ),
       ],
     );
   }

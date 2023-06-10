@@ -42,13 +42,13 @@ class _MyAppState extends State<MyApp> {
     // Check initial link if app was in cold state (terminated)
     final appLink = await _appLinks.getInitialAppLink();
     if (appLink != null) {
-      print('getInitialAppLink: $appLink');
+      //print('getInitialAppLink: $appLink');
       openAppLink(appLink);
     }
 
     // Handle link when app is in warm state (front or background)
     _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
-      print('onAppLink: $uri');
+      //print('onAppLink: $uri');
       openAppLink(uri);
     });
   }
@@ -106,8 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: Color.fromRGBO(48, 237, 209, 0.973),
+        title: Text('Volcano Form 🌋'),
       ),
       body: Center(
         child: Column(
