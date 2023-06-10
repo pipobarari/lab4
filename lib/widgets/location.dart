@@ -10,8 +10,10 @@ class LocationWidget extends StatefulWidget {
 class _LocationWidgetState extends State<LocationWidget> {
   final myControllerVolcanoName = TextEditingController();
   final myControllerVolcanoHeight = TextEditingController();
-  String _locationMessage = 'https://192.168.0.17:9101/#/location';
-  String whatsAppLink = 'https://wa.me/?text=';
+
+  String _uriNewView = 'http:/localhost:57752/#/location';
+  String _locationMessage = '';
+  String whatsAppLink = 'http://wa.me/?text=';
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
@@ -56,16 +58,16 @@ class _LocationWidgetState extends State<LocationWidget> {
 
     setState(() {
       _locationMessage =
-          '$_locationMessage/?latitude=${position.latitude}&longitude=${position.longitude}&volName=${myControllerVolcanoName.text}&volHeight=${myControllerVolcanoHeight.text}';
+          '$_uriNewView/?latitude=${position.latitude}&longitude=${position.longitude}&volName=${myControllerVolcanoName.text}&volHeight=${myControllerVolcanoHeight.text}';
     });
   }
 
   void sendWhatsAppLink() async {
-    //Esto fue lo ultimo que intente, pero no sirvio :c
-    final encodedUrl = Uri.encodeFull(_locationMessage);
+    final encodedUrl = Uri.encodeComponent(_locationMessage);
+    final encodedWhatsAppLink = '$whatsAppLink$encodedUrl';
 
-    if (await canLaunchUrl(Uri.parse(whatsAppLink))) {
-      await launchUrl(Uri.parse('$encodedUrl$encodedUrl'));
+    if (await canLaunchUrl(Uri.parse(encodedWhatsAppLink))) {
+      await launchUrl(Uri.parse(encodedWhatsAppLink));
     } else {
       print('Failed to open WhatsApp');
     }
@@ -90,7 +92,7 @@ class _LocationWidgetState extends State<LocationWidget> {
         ),
         ElevatedButton(
           onPressed: sendWhatsAppLink,
-          child: const Text('Generar fucking link de WhatsApp'),
+          child: const Text('Generar link de WhatsApp'),
         ),
         const SizedBox(height: 20),
         TextButton(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lab4flutter/widgets/screen_arguments.dart';
 
-Widget customScreen(Map<String, dynamic> args) {
+Widget customScreen(Map<String, String> args) {
   var latitude = args['latitude'];
   var longitude = args['longitude'];
   var volName = args['volName'];
@@ -10,7 +10,8 @@ Widget customScreen(Map<String, dynamic> args) {
   return Scaffold(
     appBar: AppBar(title: const Text('Second Screen')),
     body: Center(
-        child: Text(
-            'Latitude: $latitude \nLongitude: $longitude\nName: $volName\nHeight: $volHeight')),
+      child: Text(
+          'Latitude: $latitude \nLongitude: $longitude\nName: $volName\nHeight: $volHeight'),
+    ),
   );
 }
