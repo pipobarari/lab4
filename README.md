@@ -1,16 +1,10 @@
-# lab4flutter
+# lab4 - Volcanos 🌋
 
-A new Flutter project.
+In the main view, you can enter data for a volcano and then generate a link, by clicking the button Generate Link, them you can see the link in the bottom:
+![image](https://github.com/pipobarari/lab4/assets/69374529/0fc20a2e-24ab-4827-83c6-03f72d2a6d3c)
 
-## Getting Started
+If you go click on share by whatsapp, the app will be redirected to a new window:
+![image](https://github.com/pipobarari/lab4/assets/69374529/adf5050a-e938-49b2-9581-696cbd1cb7eb)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+If you decide to view the link, simply click on it, the application will be redirected to the final view and you will be able to see the map, in addition to the information entered:
+![image](https://github.com/pipobarari/lab4/assets/69374529/738d61b3-178b-47ce-a143-a54d8978d872)
