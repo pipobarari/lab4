@@ -10,8 +10,8 @@ class LocationWidget extends StatefulWidget {
 class _LocationWidgetState extends State<LocationWidget> {
   final myControllerVolcanoName = TextEditingController();
   final myControllerVolcanoHeight = TextEditingController();
-  String _locationMessage = 'https://wa.me/?text=';
-  String? whatsAppLink;
+  String _locationMessage = 'https://192.168.0.17:9101/#/location';
+  String whatsAppLink = 'https://wa.me/?text=';
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
@@ -55,14 +55,17 @@ class _LocationWidgetState extends State<LocationWidget> {
     final position = await _determinePosition();
 
     setState(() {
-      _locationMessage = _locationMessage +
-          'Latitude: ${position.latitude}\nLongitude: ${position.longitude} ${myControllerVolcanoName.text} ${myControllerVolcanoHeight.text} }}';
+      _locationMessage =
+          '$_locationMessage/?latitude=${position.latitude}&longitude=${position.longitude}&volName=${myControllerVolcanoName.text}&volHeight=${myControllerVolcanoHeight.text}';
     });
   }
 
   void sendWhatsAppLink() async {
-    if (await canLaunchUrl(Uri.parse(_locationMessage))) {
-      await launchUrl(Uri.parse(_locationMessage));
+    //Esto fue lo ultimo que intente, pero no sirvio :c
+    final encodedUrl = Uri.encodeFull(_locationMessage);
+
+    if (await canLaunchUrl(Uri.parse(whatsAppLink))) {
+      await launchUrl(Uri.parse('$encodedUrl$encodedUrl'));
     } else {
       print('Failed to open WhatsApp');
     }
