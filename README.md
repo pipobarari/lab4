@@ -1,4 +1,4 @@
-# lab4 - Volcanos 🌋
+# lab4 - Volcanoes 🌋
 
 In the main view, you can enter data for a volcano and then generate a link, by clicking the button Generate Link, them you can see the link in the bottom:
 ![image](https://github.com/pipobarari/lab4/assets/69374529/0fc20a2e-24ab-4827-83c6-03f72d2a6d3c)
